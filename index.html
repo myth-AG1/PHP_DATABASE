@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div
+      class="bg-white p-8 rounded-lg shadow-md w-full max-w-md mx-auto my-auto"
+    >
+      <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">
+        Student Registration
+      </h2>
+      <form action="insert.php" method="POST" class="space-y-4">
+        <div>
+          <label for="name" class="block text-gray-700 font-medium mb-1"
+            >Name:</label
+          >
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+        <div>
+          <label for="email" class="block text-gray-700 font-medium mb-1"
+            >Email:</label
+          >
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+        <div>
+          <label for="course" class="block text-gray-700 font-medium mb-1"
+            >Course Name:</label
+          >
+          <input
+            type="text"
+            id="course"
+            name="course"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+        <input
+          type="submit"
+          value="Register"
+          class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer"
+        />
+      </form>
+      <div class="mt-6 text-center">
+        <a href="view.php" class="text-blue-600 hover:underline"
+          >View Registered Students</a
+        >
+      </div>
+    </div>
+  </body>
+</html>
