@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$username = "root"; // Replace with your database username
-$password = ""; // Replace with your database password
-$dbname = "student_db";
+$username = "root";
+$password = "";
+$dbname = "student-db";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -16,14 +16,18 @@ if ($conn->connect_error) {
 $name = $_POST['name'];
 $email = $_POST['email'];
 $course = $_POST['course'];
+$gender = $_POST['gender'];
+$dob = $_POST['dob'];
+$phone = $_POST['phone'];
+$address = $_POST['address'];
 
 // Prepare the SQL statement
-$sql = "INSERT INTO students (name, email, course) VALUES (?, ?, ?)";
+$sql = "INSERT INTO students (name, email, course, gender, dob, phone, address) VALUES (?, ?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
 
 // Bind parameters to the statement
-// 'sss' stands for three string parameters
-$stmt->bind_param("sss", $name, $email, $course);
+// 'sssssss' stands for seven string parameters
+$stmt->bind_param("sssssss", $name, $email, $course, $gender, $dob, $phone, $address);
 
 // Execute the statement
 if ($stmt->execute()) {

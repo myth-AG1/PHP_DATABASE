@@ -7,7 +7,7 @@ ini_set('display_errors', 1);
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "student_db";
+$dbname = "student-db";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -17,8 +17,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Query students
-$sql = "SELECT id, name, email, course, reg_date FROM students";
+// Query students with all new columns
+$sql = "SELECT id, name, email, course, gender, dob, phone, address, reg_date FROM students";
 $result = $conn->query($sql);
 
 // Start HTML
@@ -26,19 +26,32 @@ echo "<!DOCTYPE html>
 <html>
 <head>
     <title>Registered Students</title>
+    <style>
+        body { font-family: sans-serif; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
 </head>
 <body>
     <h2>Registered Students</h2>";
 
 if ($result->num_rows > 0) {
-    echo "<table border='1' cellpadding='10'>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Course</th>
-            <th>Registration Date</th>
-          </tr>";
+    echo "<table>
+          <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Course</th>
+                <th>Gender</th>
+                <th>Date of Birth</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Registration Date</th>
+            </tr>
+          </thead>
+          <tbody>";
 
     while ($row = $result->fetch_assoc()) {
         echo "<tr>
@@ -46,18 +59,20 @@ if ($result->num_rows > 0) {
                 <td>" . htmlspecialchars($row["name"]) . "</td>
                 <td>" . htmlspecialchars($row["email"]) . "</td>
                 <td>" . htmlspecialchars($row["course"]) . "</td>
+                <td>" . htmlspecialchars($row["gender"]) . "</td>
+                <td>" . htmlspecialchars($row["dob"]) . "</td>
+                <td>" . htmlspecialchars($row["phone"]) . "</td>
+                <td>" . htmlspecialchars($row["address"]) . "</td>
                 <td>" . htmlspecialchars($row["reg_date"]) . "</td>
               </tr>";
     }
 
-    echo "</table>";
+    echo "</tbody></table>";
 } else {
-    echo "No students registered yet.";
+    echo "No students found.";
 }
 
-// Close the connection
-$conn->close();
+echo "</body></html>";
 
-echo "</body>
-</html>";
+$conn->close();
 ?>
